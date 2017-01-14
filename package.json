@@ -1,0 +1,30 @@
+{
+  "name": "@coffee-toolbox/parallel",
+  "version": "1.0.0",
+  "description": "Run promise in parallel",
+  "main": "Parallel.coffee",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coffee-toolbox/parallel.git"
+  },
+  "keywords": [
+    "promise", "parallel"
+  ],
+  "author": "James Ruan <ruanbeihong@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/coffee-toolbox/parallel/issues"
+  },
+  "homepage": "https://github.com/coffee-toolbox/parallel#readme",
+  "dependencies": {
+    "@coffee-toolbox/logger": "git+https://github.com/coffee-toolbox/logger.git",
+    "@coffee-toolbox/eventemitter": "git+https://github.com/coffee-toolbox/eventemitter.git"
+  },
+  "devDependencies": {
+    "coffee-loader": "^0.7.2",
+    "coffee-script": "^1.12.2"
+  }
+}
