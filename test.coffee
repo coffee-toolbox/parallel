@@ -1,6 +1,5 @@
 {Parallel} = require('./Parallel.coffee')
 
-
 works = [0..10].map (i)->
 	(s)->
 		new Promise (res)->
@@ -15,7 +14,7 @@ works.forEach (w)->
 	sequential.add ->
 		w 'seq'
 
-sequential.allDone ->
+sequential.allDone().then ->
 	console.log 'sequential done'
 
 console.log 'run parallel'
@@ -30,6 +29,6 @@ setTimeout ->
 		p2.add ->
 			w 'parallel later'
 
-	p2.allDone ->
+	p2.allDone().then ->
 		console.log 'parallel done'
 , 2000
