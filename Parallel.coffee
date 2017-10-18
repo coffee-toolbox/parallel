@@ -1,12 +1,12 @@
 'use strict'
 {Logger} = require('@coffee-toolbox/logger')
-{EventEmitter} = require('@coffee-toolbox/eventemitter')
+EventEmitter = require('@coffee-toolbox/eventemitter')
 
 SEQUENTIAL = 1
 
-class Parallel extends EventEmitter
+export default class Parallel extends EventEmitter
 	constructor: (@parallel)->
-		super
+		super()
 		@logger = new Logger @constructor.name
 		@done = false
 		@running = 0
@@ -34,6 +34,3 @@ class Parallel extends EventEmitter
 					@queue.shift()()
 				else if @done and @running is 0
 					@emit 'ALLDONE'
-
-module.exports =
-	Parallel: Parallel

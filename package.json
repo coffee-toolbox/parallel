@@ -1,6 +1,6 @@
 {
   "name": "@coffee-toolbox/parallel",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Run promise in parallel",
   "main": "Parallel.coffee",
   "scripts": {
@@ -11,7 +11,8 @@
     "url": "git+https://github.com/coffee-toolbox/parallel.git"
   },
   "keywords": [
-    "promise", "parallel"
+    "promise",
+    "parallel"
   ],
   "author": "James Ruan <ruanbeihong@gmail.com>",
   "license": "MIT",
@@ -20,11 +21,13 @@
   },
   "homepage": "https://github.com/coffee-toolbox/parallel#readme",
   "dependencies": {
-    "@coffee-toolbox/logger": "git+https://github.com/coffee-toolbox/logger.git",
-    "@coffee-toolbox/eventemitter": "git+https://github.com/coffee-toolbox/eventemitter.git"
+    "@coffee-toolbox/eventemitter": "git+https://github.com/coffee-toolbox/eventemitter.git",
+    "@coffee-toolbox/logger": "git+https://github.com/coffee-toolbox/logger.git"
   },
   "devDependencies": {
-    "coffee-loader": "^0.7.2",
-    "coffee-script": "^1.12.2"
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "coffee-loader": "https://github.com/webpack-contrib/coffee-loader.git",
+    "coffeescript": "^2.0.1"
   }
 }

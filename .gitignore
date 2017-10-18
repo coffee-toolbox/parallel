@@ -6,3 +6,4 @@ node_modules
 
 # Vim swap
 *.swp
+dist
