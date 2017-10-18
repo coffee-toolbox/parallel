@@ -1,4 +1,3 @@
-'use strict'
 {Logger} = require('@coffee-toolbox/logger')
 EventEmitter = require('@coffee-toolbox/eventemitter')
 
@@ -8,29 +7,38 @@ export default class Parallel extends EventEmitter
 	constructor: (@parallel)->
 		super()
 		@logger = new Logger @constructor.name
-		@done = false
-		@running = 0
+		@semaphore = 1
 		@queue = []
-		@parallel ?= SEQUENTIAL
+		@concurrency ?= SEQUENTIAL
+		@logger.assert @concurrency > 0, '@concurrency is not larger than 0'
 
 	add: (f)->
 		@logger.assert f instanceof Function
+		@logger.assert @semaphore isnt 0, 'adding to an "all-done" Parallel"'
+
+		@semaphore += 1
 		@queue.push @_run_next f
 
-		if @running < @parallel
+		if @semaphore - 1 <= @concurrency
 			@queue.shift()()
 
-	allDone: (f)->
-		@done = true
-		@once 'ALLDONE', f
+		this
+
+	allDone: ->
+		@semaphore -= 1
+		if @semaphore is 0
+			Promise.resolve()
+		else
+			new Promise (res)=>
+				@once 'ALLDONE', ->
+					res()
 
 	_run_next: (f)->
 		=>
-			@running += 1
-			p = Promise.resolve f()
-			p.then =>
-				@running -= 1
+			Promise.resolve(f())
+			.then =>
+				@semaphore -= 1
 				if @queue.length > 0
 					@queue.shift()()
-				else if @done and @running is 0
+				else if @semaphore is 0
 					@emit 'ALLDONE'
